@@ -1,0 +1,12 @@
+<template name="list">
+<div class="list list-of-{{allow}}" data-id="{{id}}">
+	<input class="title" type="text" {{editable}} size="{{titleSize}}" value="{{title}}" title="{{title}}">
+	<div class="items">
+		{{#each items}}
+			{{> Template.dynamic template=template}}
+		{{/each}}
+		<button class="round add-item" value="{{allow}}">{{> entypo 'plus'}}</button>
+	</div>
+</div>
+</template>
+

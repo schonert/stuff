@@ -1,0 +1,6 @@
+<template name="todo">
+	<div class="todo-item">
+		<input class="todo {{state}}" {{editable}} name="title" value="{{title}}" title="{{title}}" data-id="{{_id}}" tabindex="0" />
+		<button class="remove round">{{> entypo 'cross'}}</button>
+	</div>
+</template>
