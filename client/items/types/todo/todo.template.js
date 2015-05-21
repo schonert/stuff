@@ -43,11 +43,15 @@ if(Meteor.isClient) {
 			}, 100);
 		},
 		'keyup input, blur input': function(event, template) {
-			var _this = this;
+			var self = this;
 			var isEditing = Session.get('isEditing');
+			var debounce = Session.get('debounce');
 
-			// Update title
-			Items.update(this._id, {$set:{title:event.target.value}});
+			clearTimeout(debounce);
+			Session.set('debounce', setTimeout(function() {
+				// Update title
+				Items.update(self._id, {$set:{title:event.target.value}});
+			}, 300));
 
 			// Exit on escape + blur
 			if(event.which === 27 || event.type === 'focusout') {
@@ -71,7 +75,6 @@ if(Meteor.isClient) {
 
 			if(([27].indexOf(event.which) !== -1 || event.type === 'focusout') && !this.title) {
 				todoRemove(this._id);
-				console.log('remove', this._id);
 			}
 		}
 	});
