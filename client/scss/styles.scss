@@ -195,10 +195,12 @@ button {
 			}
 		}
 
-	}
-
-	> .add-item {
-		margin:15px auto 0;
+		> .add-item {
+			position:absolute;
+			bottom:-80px;
+			left:50%;
+			transform:translateX(-50%);
+		}
 	}
 
 	> .title {
