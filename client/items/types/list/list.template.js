@@ -48,7 +48,7 @@ if(Meteor.isClient) {
 			Session.set('debounce', setTimeout(function() {
 				// Update title
 				Items.update(self._id, {$set:{title:event.target.value}});
-			}, 300));
+			}, 150));
 
 			// Exit on escape + blur
 			if(event.which === 27 || event.type === 'focusout') {
