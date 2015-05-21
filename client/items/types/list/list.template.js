@@ -19,9 +19,6 @@ if(Meteor.isClient) {
 		},
 		editable: function() {
 			return !Session.get('isEditing') ? 'readonly' : '';
-		},
-		titleSize: function() {
-			return this.title ? this.title.length * 1.08 : 25;
 		}
 	});
 
