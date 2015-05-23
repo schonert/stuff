@@ -56,6 +56,9 @@ if(Meteor.isClient) {
 			var isEditing = Session.get('isEditing');
 			var debounce = Session.get('debounce');
 
+			// Set tilte
+			self.title = event.currentTarget.value;
+
 			clearTimeout(debounce);
 			Session.set('debounce', setTimeout(function() {
 				// Update title

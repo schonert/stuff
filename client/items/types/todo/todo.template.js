@@ -59,10 +59,13 @@ if(Meteor.isClient) {
 			var isEditing = Session.get('isEditing');
 			var debounce = Session.get('debounce');
 
+			// Set title
+			self.title = event.currentTarget.value;
+
 			clearTimeout(debounce);
 			Session.set('debounce', setTimeout(function() {
 				// Update title
-				Items.update(self._id, {$set:{title:event.target.value}});
+				Items.update(self._id, {$set:{title:event.currentTarget.value}});
 			}, 150));
 
 			// Exit on escape + blur
