@@ -1,12 +1,14 @@
 if(Meteor.isClient) {
+	/**
+	 * Load default list
+	 * [Should be more dynamic]
+	 */
 	Template.registerHelper('default', function() {
 		return Items.findOne('default');
 	});
 
-	Template.list.onCreated(function() {
-	});
-
 	Template.list.helpers({
+		// Find all items
 		items: function() {
 			var list = this.items.map(function(item) {
 				return Items.findOne(item);
@@ -14,15 +16,18 @@ if(Meteor.isClient) {
 
 			return list;
 		},
+		// Return item type as tempalte
 		template: function() {
 			return this.type;
 		},
+		// Change list title readonly
 		editable: function() {
 			return !Session.get('isEditing') ? 'readonly' : '';
 		}
 	});
 
 	Template.list.events({
+		// Add item
 		'click button': function(event) {
 			var type = event.currentTarget.value || Session.get('allow') || 'todo';
 			var id = Items.insert({type:type});
@@ -31,6 +36,7 @@ if(Meteor.isClient) {
 
 			event.stopPropagation();
 		},
+		// dblclick to enter editing mode of title
 		'dblclick .title': function(event) {
 			Session.set('isEditing', true);
 			Items.update(this._id, {$set:{editing: Session.get('isEditing')}});
@@ -39,6 +45,12 @@ if(Meteor.isClient) {
 				event.currentTarget.focus();
 			}, 100);
 		},
+		/**
+		 * - Update title on keyup
+		 * - Exit on esc / blur
+		 * - Toogle editing mode on enter
+		 * - else enter editing mode, if not arrows
+		 */
 		'keyup .title, blur .title': function(event, template) {
 			var self = this;
 			var isEditing = Session.get('isEditing');
@@ -47,7 +59,7 @@ if(Meteor.isClient) {
 			clearTimeout(debounce);
 			Session.set('debounce', setTimeout(function() {
 				// Update title
-				Items.update(self._id, {$set:{title:event.target.value}});
+				Items.update(self._id, {$set:{title:event.currentTarget.value}});
 			}, 150));
 
 			// Exit on escape + blur
