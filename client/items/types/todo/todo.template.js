@@ -70,6 +70,10 @@ if(Meteor.isClient) {
 				Session.set('isEditing', false);
 				Items.update(this._id, {$set:{editing: false}});
 
+				if(!this.title) {
+					todoRemove(this._id);
+				}
+
 			// Toggle on enter
 			} else if(event.which === 13) {
 				Session.set('isEditing', !isEditing);
@@ -83,10 +87,6 @@ if(Meteor.isClient) {
 			} else if(!isEditing && [37, 38, 39, 40].indexOf(event.which) === -1) {
 				Session.set('isEditing', true);
 				Items.update(this._id, {$set:{editing: true}});
-			}
-
-			if(([27].indexOf(event.which) !== -1 || event.type === 'focusout') && !this.title) {
-				todoRemove(this._id);
 			}
 		}
 	});
