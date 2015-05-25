@@ -28,11 +28,17 @@ if(Meteor.isClient) {
 
 	Template.list.events({
 		// Add item
-		'click button': function(event) {
+		'click .add-item': function(event) {
 			var type = event.currentTarget.value || Session.get('allow') || 'todo';
 			var id = Items.insert({type:type});
 
 			Items.update(this._id, {$push: {items: id}});
+
+			event.stopPropagation();
+		},
+		// Remove list
+		'click .remove-list': function(event) {
+			listRemove(this._id);
 
 			event.stopPropagation();
 		},
@@ -78,5 +84,18 @@ if(Meteor.isClient) {
 				Session.set('isEditing', true);
 			}
 		}
+	});
+}
+
+/**
+ * Removes a list item, and all
+ * the references
+ *
+ * @param {string} id
+ */
+function listRemove(id) {
+	Items.find({items: {$in: [id]}}).map(function(item){
+		Items.update(item._id, {$pull: {items: id}});
+		Items.remove(id);
 	});
 }

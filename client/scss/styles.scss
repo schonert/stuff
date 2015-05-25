@@ -123,7 +123,7 @@ button {
 	> .items {
 		position:relative;
 
-		.add-item {
+		> .add-item {
 			margin:15px auto;
 		}
 	}
@@ -133,6 +133,19 @@ button {
 		font-size:25px;
 		width:100%;
 		text-align:center;
+	}
+
+	> .remove-list {
+		position:absolute;
+		top:10px;
+		right:10px;
+		opacity:0.05;
+	}
+
+	&:hover {
+		> .remove-list {
+			opacity:0.2;
+		}
 	}
 }
 
