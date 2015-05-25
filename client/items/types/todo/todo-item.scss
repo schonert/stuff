@@ -1,0 +1,44 @@
+.todo-item {
+	position:relative;
+
+	input {
+		width:100%;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+
+		&[readonly] {
+			cursor:pointer;
+
+			&.completed {
+				color:#ddd;
+			}
+		}
+
+		&:focus + button {
+			display:block;
+		}
+	}
+
+	button {
+		display:none;
+		position:absolute;
+		right:0;
+		top:50%;
+		transform:translate(50%, -50%);
+
+		&:focus {
+			display:block;
+		}
+	}
+
+	&:hover {
+		button {
+			display:block;
+		}
+
+		[readonly].completed {
+			color:#aaa;
+		}
+	}
+}
