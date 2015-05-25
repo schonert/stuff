@@ -1,7 +1,7 @@
 <template name="list">
 <div class="list-item list-of-{{allow}}" data-id="{{id}}">
 	<input class="title" type="text" {{editable}} value="{{title}}" title="{{title}}">
-	<button class="round remove-list">{{> entypo 'circle-with-minus'}}</button>
+	<button class="round remove-list">{{> entypo 'plus'}}</button>
 	<div class="items">
 		{{#each items}}
 			{{> Template.dynamic template=template}}

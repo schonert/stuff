@@ -25,6 +25,11 @@
 		top:10px;
 		right:10px;
 		opacity:0.05;
+		transition:opacity 0.3s;
+
+		svg {
+			transform:rotate(45deg);
+		}
 	}
 
 	&:hover {
