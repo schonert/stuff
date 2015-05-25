@@ -20,7 +20,7 @@
 		}
 	}
 
-	button {
+	.remove {
 		display:none;
 		position:absolute;
 		right:0;
@@ -33,7 +33,7 @@
 	}
 
 	&:hover {
-		button {
+		.remove {
 			display:block;
 		}
 
