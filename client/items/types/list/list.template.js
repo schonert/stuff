@@ -4,7 +4,7 @@ if(Meteor.isClient) {
 	 * [Should be more dynamic]
 	 */
 	Template.registerHelper('default', function() {
-		return Items.findOne('default');
+		return Items.findOne(userId);
 	});
 
 	Template.list.helpers({
